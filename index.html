@@ -3,21 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .home-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .enter-button {
+            background-color: #00c80c;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px #00c80c;
+        }
+        .enter-button:hover {
+            box-shadow: 0 0 20px #00c80c;
+        }
+    </style>
 </head>
 <body>
-    <div class="terminal">
-        <div id="output">
-            <p>Initializing system...</p>
-            <p>Accessing mainframe...</p>
-            <p>Welcome, Operator. Type <span class="command">'help'</span> for a list of commands</p>
-        </div> 
-        <div class="input-line">
-            <span class="prompt">></span>
-            <input type="text" id="commandInput" autofocus>                
-        </div>
+    <div class="home-container">
+        <h1>Welcome to Cyberpunk Terminal</h1>
+        <button class="enter-button" onclick="location.href='index.html'">Enter</button>
     </div>
-    <script src="script.js"></script>
 </body>
 </html>
