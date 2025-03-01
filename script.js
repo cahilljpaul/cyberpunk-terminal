@@ -1,4 +1,3 @@
-// Wait for the page to load
 document.addEventListener("DOMContentLoaded", function () {
     const inputField = document.getElementById("commandInput");
     const outputDiv = document.getElementById("output");
@@ -9,54 +8,76 @@ document.addEventListener("DOMContentLoaded", function () {
         clear: "clear"
     };
 
-    // Animate initial messages
-    typeText("Initializing system...", outputDiv, function() {
-        typeText("Accessing mainframe...", outputDiv, function() {
-            typeText("Welcome, Operator. Type 'help' for a list of commands", outputDiv);
-        });
-    });
-
     inputField.addEventListener("keydown", function (event) {
         if (event.key === "Enter") {
-            let userInput = inputField.value.trim().toLowerCase();
+            const userInput = inputField.value.trim().toLowerCase();
             inputField.value = "";
 
-            let userLine = document.createElement("p");
+            const userLine = document.createElement("p");
             userLine.innerHTML = `> ${userInput}`;
             outputDiv.appendChild(userLine);
 
-            if (commands[userInput]) {
-                if (commands[userInput] === "clear") {
-                    outputDiv.innerHTML = ""; // Clears the terminal
-                } else {
-                    typeText(commands[userInput], outputDiv);
-                }
-            } else {
-                typeText("Error: Command not recognized.", outputDiv);
-            }
+            // Create "Processing..." animation
+            const processingText = document.createElement("p");
+            processingText.innerHTML = "Processing.";
+            outputDiv.appendChild(processingText);
+
+            const processingInterval = startProcessingAnimation(processingText);
+
+            setTimeout(() => {
+                clearInterval(processingInterval); // Stop animation
+                processingText.innerHTML = "✅ Processing complete!";
+
+                setTimeout(() => {
+                    handleCommand(userInput, outputDiv, commands);
+                }, 1000); // Delay before showing the response
+
+            }, 3000); // Processing time before response appears
 
             outputDiv.scrollTop = outputDiv.scrollHeight;
         }
     });
 
-    function typeText(text, targetElement, callback) {
-        let responseLine = document.createElement("p");
-        responseLine.classList.add("typing");
+    function startProcessingAnimation(element) {
+        let dots = 0;
+        return setInterval(() => {
+            dots = (dots + 1) % 4; // Cycle through 0-3 dots
+            element.innerHTML = "Processing" + ".".repeat(dots);
+        }, 500); // Speed of dot animation
+    }
+
+    function handleCommand(command, outputDiv, commands) {
+        if (commands.hasOwnProperty(command)) {
+            if (commands[command] === "clear") {
+                outputDiv.innerHTML = ""; // Clears terminal
+            } else {
+                typeText(commands[command], outputDiv);
+            }
+        } else {
+            // Do nothing for unrecognized commands
+            // Optionally, you can provide a different response or log it
+            // typeText("⚠️ Error: Command not recognized.", outputDiv);
+        }
+
+        // After response, ask user to copy text
+        const copyPrompt = document.createElement("p");
+        copyPrompt.innerHTML = "📋 Press CTRL+C to copy.";
+        outputDiv.appendChild(copyPrompt);
+    }
+
+    function typeText(text, targetElement) {
+        const responseLine = document.createElement("p");
         targetElement.appendChild(responseLine);
         let index = 0;
-    
+
         function type() {
             if (index < text.length) {
-                responseLine.innerHTML = text.substring(0, index + 1) + "<span class='cursor'>|</span>";
+                responseLine.innerHTML += text.charAt(index);
                 index++;
-                setTimeout(type, 50);
-            } else {
-                responseLine.classList.remove("typing");
-                if (callback) callback();
+                setTimeout(type, 50); // Typing speed
             }
         }
-    
+
         type();
     }
 });
-

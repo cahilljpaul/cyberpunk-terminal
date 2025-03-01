@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .home-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .enter-button {
+            background-color: #00c80c;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px #00c80c;
+        }
+        .enter-button:hover {
+            box-shadow: 0 0 20px #00c80c;
+        }
+    </style>
+</head>
+<body>
+    <div class="home-container">
+        <h1>Welcome to Cyberpunk Terminal</h1>
+        <button class="enter-button" onclick="location.href='index.html'">Enter</button>
+    </div>
+</body>
+</html>

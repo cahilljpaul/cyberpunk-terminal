@@ -1,7 +1,7 @@
 /* Cyberpunk Hacker theme */
 body {
     background-color: black;
-    color: #00ff00;
+    color: #00c80c;
     font-family: 'Courier New', monospace;
     padding: 20px;
     display: flex;
@@ -12,16 +12,16 @@ body {
 .terminal {
     width: 600px;
     height: 400px;
-    border: 2px solid #00ff00;
+    border: 0px solid #00c80c;
     padding: 20px;
-    box-shadow: 0 0 15px #00ff00;
+    box-shadow: 0 0 15px #00c80c;
     overflow-y: auto;
 }
 
 /* Glowing Text */
 #output p {
     margin: 5px 0;
-    text-shadow: 0 0 10px #00ff00;
+    text-shadow: 0 0 10px #00c80c;
 }
 
 /* User Input */
@@ -32,14 +32,14 @@ body {
 }
 
 .prompt {
-    color: #00ff00;
+    color: #00c80c;
     margin-right: 5px;
 }
 
 input {
     background: none;
     border: none;
-    color: #00ff00;
+    color: #00c80c;
     font-family: inherit;
     font-size: 16px;
     width: 100%;
@@ -53,4 +53,5 @@ input {
 .typing::after {
     content: "|";
     animation: blink 0.6s infinite alternate;
+    color: #00c80c;
 }
